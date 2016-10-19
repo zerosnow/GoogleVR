@@ -89,6 +89,9 @@ public class SongRender extends VRRenderer{
 
             // Create a canvas to do the drawing
             mLyricCanvas = new Canvas(mLyricBitmap);
+            mLyricCanvas.drawColor(Color.BLACK);
+            mLyricPaint.setColor(Color.RED);
+            mLyricCanvas.drawText(getContext().getResources().getString(R.string.loading), 20, mLyricCanvas.getHeight()  / 2, mLyricPaint);
 
             mLyricMaterial  = new Material();
             mLyricMaterial.setColor(0x444444);
@@ -222,16 +225,6 @@ public class SongRender extends VRRenderer{
                     e.printStackTrace();
                 }
                 index++;
-            }
-        } else {
-            mLyricCanvas.drawColor(Color.BLACK);
-            mLyricPaint.setColor(Color.RED);
-            mLyricCanvas.drawText(getContext().getResources().getString(R.string.loading), 20, mLyricCanvas.getHeight()  / 2, mLyricPaint);
-
-            try {
-                mLyricMaterial.addTexture(new Texture("simple", mLyricBitmap));
-            } catch (ATexture.TextureException e) {
-                e.printStackTrace();
             }
         }
 
