@@ -228,25 +228,6 @@ public class SongRender extends VRRenderer{
             }
         }
 
-//        transTime -= deltaTime;
-//        if (transTime <= 0) {
-//            transTime = 5;
-//            index++;
-//            if (index == lyricString.length) {
-//                index = 0;
-//            }
-//            mLyricCanvas.drawColor(Color.BLACK);
-//            mLyricPaint.setColor(Color.RED);
-//            mLyricCanvas.drawText(lyricString[index], 20, mLyricCanvas.getHeight()  / 2, mLyricPaint);
-//            mLyricPaint.setColor(Color.WHITE);
-//            mLyricCanvas.drawText(lyricString[(index + 1) % lyricString.length], 100, mLyricCanvas.getHeight()  / 2 + mLyricPaint.getTextSize(), mLyricPaint);
-//            try {
-//                mLyricMaterial.addTexture(new Texture("simple", mLyricBitmap));
-//            } catch (ATexture.TextureException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
         if(songId != GvrAudioEngine.INVALID_ID) {
             gvrAudioEngine.setSoundObjectPosition(
                     songId, (float) mHifiObject.getX(), (float) mHifiObject.getY(), (float) mHifiObject.getZ());

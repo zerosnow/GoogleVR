@@ -21,7 +21,7 @@ public class MenuRender extends VRRenderer {
 
     private Activity activity;
     private Plane treasurePlane;
-    private Plane paintPlane;
+    private Plane songPlane;
     private Plane flyPlane;
 
     public MenuRender(Activity activity) {
@@ -63,17 +63,17 @@ public class MenuRender extends VRRenderer {
             getCurrentScene().addChild(treasurePlane);
 
             simpleMaterial = new Material();
-            simpleMaterial.addTexture(new Texture("simple", R.drawable.controllerpaint));
+            simpleMaterial.addTexture(new Texture("simple", R.drawable.song_play_test));
 
-            paintPlane = new Plane(8, 4, 1, 1);
-            paintPlane.setPosition(-8f, 0f, -4.5f);
-            paintPlane.setOrientation(paintPlane.getOrientation().fromAngleAxis(0, 1, 0, 120));
+            songPlane = new Plane(8, 4, 1, 1);
+            songPlane.setPosition(-8f, 0f, -4.5f);
+            songPlane.setOrientation(songPlane.getOrientation().fromAngleAxis(0, 1, 0, 120));
 //            largeCanvasPlane.setOrientation(new Quaternion(0, 0, 0, 1));
-            paintPlane.setMaterial(simpleMaterial);
-            paintPlane.setColor(Color.TRANSPARENT);
-            paintPlane.setBackSided(true);
+            songPlane.setMaterial(simpleMaterial);
+            songPlane.setColor(Color.TRANSPARENT);
+            songPlane.setBackSided(true);
 
-            getCurrentScene().addChild(paintPlane);
+            getCurrentScene().addChild(songPlane);
 
             simpleMaterial = new Material();
             simpleMaterial.addTexture(new Texture("simple", R.drawable.plane));
@@ -94,29 +94,55 @@ public class MenuRender extends VRRenderer {
         }
     }
 
+    private double songLookTime = 0;
+    private double planeLookTime = 0;
+    private double treasureLookTime = 0;
+
     @Override
     protected void onRender(long ellapsedRealtime, double deltaTime) {
         super.onRender(ellapsedRealtime, deltaTime);
 
         if (isLookingAtObject(treasurePlane)) {
             treasurePlane.setScale(1.5);
-            Intent intent = new Intent(mContext, SongActivity.class);
-            mContext.startActivity(intent);
-            ((Activity)mContext).finish();
+            treasureLookTime += deltaTime;
+            songLookTime = 0;
+            planeLookTime = 0;
+            if (treasureLookTime >= 2) {
+                treasureLookTime = 0;
+                Intent intent = new Intent(mContext, TreasureActivity.class);
+                mContext.startActivity(intent);
+            }
         } else {
             treasurePlane.setScale(1);
+            treasureLookTime = 0;
         }
-        if (isLookingAtObject(paintPlane)) {
-            paintPlane.setScale(1.5);
+        if (isLookingAtObject(songPlane)) {
+            songPlane.setScale(1.5);
+            songLookTime += deltaTime;
+            treasureLookTime = 0;
+            planeLookTime = 0;
+            if (songLookTime >= 2) {
+                songLookTime = 0;
+                Intent intent = new Intent(mContext, SongActivity.class);
+                mContext.startActivity(intent);
+            }
         } else {
-            paintPlane.setScale(1);
+            songPlane.setScale(1);
+            songLookTime = 0;
         }
         if (isLookingAtObject(flyPlane)) {
             flyPlane.setScale(1.5);
-//            Intent intent = new Intent(mContext, PlaneActivity.class);
-//            mContext.startActivity(intent);
+            planeLookTime += deltaTime;
+            treasureLookTime = 0;
+            songLookTime = 0;
+            if (planeLookTime >= 2) {
+                planeLookTime = 0;
+                Intent intent = new Intent(mContext, PlaneActivity.class);
+                mContext.startActivity(intent);
+            }
         } else {
             flyPlane.setScale(1);
+            planeLookTime = 0;
         }
     }
 }
