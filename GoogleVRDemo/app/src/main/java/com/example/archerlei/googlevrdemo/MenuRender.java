@@ -1,10 +1,12 @@
 package com.example.archerlei.googlevrdemo;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 
 import com.example.archerlei.googlevrdemo.VR.VRRenderer;
+import com.google.vr.ndk.base.DaydreamApi;
 
 import org.rajawali3d.lights.DirectionalLight;
 import org.rajawali3d.materials.Material;
@@ -102,7 +104,7 @@ public class MenuRender extends VRRenderer {
             planeLookTime = 0;
             if (treasureLookTime >= 2) {
                 treasureLookTime = 0;
-                Intent intent = new Intent(mContext, TreasureActivity.class);
+                Intent intent = DaydreamApi.createVrIntent(new ComponentName(mContext, TreasureActivity.class));
                 mContext.startActivity(intent);
             }
         } else {
@@ -116,7 +118,7 @@ public class MenuRender extends VRRenderer {
             planeLookTime = 0;
             if (songLookTime >= 2) {
                 songLookTime = 0;
-                Intent intent = new Intent(mContext, SongActivity.class);
+                Intent intent = DaydreamApi.createVrIntent(new ComponentName(mContext, SongActivity.class));
                 mContext.startActivity(intent);
             }
         } else {
@@ -130,7 +132,7 @@ public class MenuRender extends VRRenderer {
             songLookTime = 0;
             if (planeLookTime >= 2) {
                 planeLookTime = 0;
-                Intent intent = new Intent(mContext, PlaneActivity.class);
+                Intent intent = DaydreamApi.createVrIntent(new ComponentName(mContext, PlaneActivity.class));
                 mContext.startActivity(intent);
             }
         } else {
