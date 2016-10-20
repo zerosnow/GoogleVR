@@ -1,7 +1,6 @@
 package com.example.archerlei.googlevrdemo;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 
@@ -46,16 +45,12 @@ public class MenuRender extends VRRenderer {
         getCurrentScene().setBackgroundColor(0x333333);
 
         try {
-//            getCurrentScene().setSkybox(R.drawable.posx_1, R.drawable.negx_1, R.drawable.posy_1, R.drawable.negy_1, R.drawable.posz_1, R.drawable.negz_1);
-
-
             Material simpleMaterial = new Material();
             simpleMaterial.addTexture(new Texture("simple", R.drawable.treasure_hunt));
 
             treasurePlane = new Plane(8, 4, 1, 1);
             treasurePlane.setZ(-9f);
             treasurePlane.setOrientation(treasurePlane.getOrientation().fromAngleAxis(0, 1, 0, 180));
-//            largeCanvasPlane.setOrientation(new Quaternion(0, 0, 0, 1));
             treasurePlane.setMaterial(simpleMaterial);
             treasurePlane.setColor(Color.TRANSPARENT);
             treasurePlane.setBackSided(true);
@@ -68,7 +63,6 @@ public class MenuRender extends VRRenderer {
             songPlane = new Plane(8, 4, 1, 1);
             songPlane.setPosition(-8f, 0f, -4.5f);
             songPlane.setOrientation(songPlane.getOrientation().fromAngleAxis(0, 1, 0, 120));
-//            largeCanvasPlane.setOrientation(new Quaternion(0, 0, 0, 1));
             songPlane.setMaterial(simpleMaterial);
             songPlane.setColor(Color.TRANSPARENT);
             songPlane.setBackSided(true);
@@ -81,7 +75,6 @@ public class MenuRender extends VRRenderer {
             flyPlane = new Plane(8, 4, 1, 1);
             flyPlane.setPosition(8f, 0, -4.5f);
             flyPlane.setOrientation(flyPlane.getOrientation().fromAngleAxis(0, 1, 0, 240));
-//            largeCanvasPlane.setOrientation(new Quaternion(0, 0, 0, 1));
             flyPlane.setMaterial(simpleMaterial);
             flyPlane.setColor(Color.TRANSPARENT);
 

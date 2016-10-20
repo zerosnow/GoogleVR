@@ -19,7 +19,6 @@ public class SongActivity extends GvrActivity {
 
         renderer = new SongRender(this);
         gvrView.setRenderer(renderer);
-//        gvrView.setTransitionViewEnabled(true);
 
         if (gvrView.setAsyncReprojectionEnabled(true)) {
             AndroidCompat.setSustainedPerformanceMode(this, true);

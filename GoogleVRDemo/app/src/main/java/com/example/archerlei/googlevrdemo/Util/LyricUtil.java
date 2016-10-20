@@ -27,11 +27,11 @@ import static android.R.id.list;
  */
 
 public class LyricUtil {
-    public static List<LyricInfo> parse(Context context, String path) {
+    public static List<LyricInfo> parse(Context context, int sourceId) {
         List<LyricInfo> list = new ArrayList<>();
 
         String encoding = "GBK";
-        InputStream in = context.getResources().openRawResource(R.raw.maizangdongtian);
+        InputStream in = context.getResources().openRawResource(sourceId);
         Reader reader = new InputStreamReader(in);
         BufferedReader bufferedReader = new BufferedReader(reader);
 

@@ -2,8 +2,6 @@ package com.example.archerlei.googlevrdemo;
 
 import android.os.Bundle;
 
-import com.example.archerlei.googlevrdemo.VR.VRRenderer;
-import com.google.protobuf.nano.InternalNano;
 import com.google.vr.sdk.base.AndroidCompat;
 import com.google.vr.sdk.base.GvrActivity;
 import com.google.vr.sdk.base.GvrView;

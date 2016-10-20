@@ -1,6 +1,5 @@
 package com.example.archerlei.googlevrdemo;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.google.vr.sdk.base.AndroidCompat;
@@ -20,7 +19,6 @@ public class PlaneActivity extends GvrActivity {
 
         renderer = new MyRender(this);
         gvrView.setRenderer(renderer);
-//        gvrView.setTransitionViewEnabled(true);
 
         if (gvrView.setAsyncReprojectionEnabled(true)) {
             AndroidCompat.setSustainedPerformanceMode(this, true);

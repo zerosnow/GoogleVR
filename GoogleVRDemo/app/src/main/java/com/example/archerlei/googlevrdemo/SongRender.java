@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import com.example.archerlei.googlevrdemo.Util.LyricInfo;
@@ -29,13 +28,8 @@ import org.rajawali3d.math.vector.Vector3;
 import org.rajawali3d.primitives.Plane;
 import org.rajawali3d.primitives.Sphere;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by archerlei on 2016/10/19.
@@ -45,7 +39,6 @@ public class SongRender extends VRRenderer{
     private static final String TAG = "SongRender";
 
     private GvrAudioEngine gvrAudioEngine;
-    private Loader3DSMax loader;
     private Object3D mHifiObject;
     private Bitmap mLyricBitmap;
     private Canvas mLyricCanvas;
@@ -146,7 +139,6 @@ public class SongRender extends VRRenderer{
     private void initAudio() {
         gvrAudioEngine =
                 new GvrAudioEngine(getContext(), GvrAudioEngine.RenderingMode.BINAURAL_HIGH_QUALITY);
-//        gvrAudioEngine.enableSpeakerStereoMode(true);
 
         new Thread(
                 new Runnable() {
@@ -156,13 +148,13 @@ public class SongRender extends VRRenderer{
                         gvrAudioEngine.setSoundObjectPosition(
                                 songId, (float)mHifiObject.getX(), (float)mHifiObject.getY(), (float)mHifiObject.getZ()
                         );
-                        gvrAudioEngine.setSoundVolume(songId, 0.5f);
+                        gvrAudioEngine.setSoundVolume(songId, 0.3f);
                         gvrAudioEngine.playSound(songId, true);
 
 
-                        gvrAudioEngine.preloadSoundFile("maizang.wav");
+                        gvrAudioEngine.preloadSoundFile("song.wav");
 
-                        id = gvrAudioEngine.createStereoSound("maizang.wav");
+                        id = gvrAudioEngine.createStereoSound("song.wav");
                         Log.d("maizang", "load finish");
                         songStart = true;
                         gvrAudioEngine.playSound(id, false);
@@ -173,11 +165,7 @@ public class SongRender extends VRRenderer{
 
     @TargetApi(Build.VERSION_CODES.N)
     private void initLyric() {
-        InputStream in = getContext().getResources().openRawResource(R.raw.maizangdongtian);
-        Reader reader = new InputStreamReader(in);
-        BufferedReader bufferedReader = new BufferedReader(reader);
-
-        mLyricList = LyricUtil.parse(getContext(), "maizangdongtian.lrc");
+        mLyricList = LyricUtil.parse(getContext(), R.raw.song_lyric);
         if (mLyricList == null) {
             return;
         }
