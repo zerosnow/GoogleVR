@@ -1,6 +1,7 @@
 package com.example.archerlei.googlevrdemo;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -196,10 +197,19 @@ public class SongRender extends VRRenderer{
     }
 
     private  int index = 0;
+    private int lookAtTimes;
 
     @Override
     public void onRender(long elapsedTime, double deltaTime) {
         super.onRender(elapsedTime, deltaTime);
+
+        boolean isLookingAt = isLookingAtObject(mHifiObject);
+        if(isLookingAt) {
+            lookAtTimes++;
+            if (lookAtTimes == 30 && mContext instanceof Activity) {
+                ((Activity) mContext).finish();
+            }
+        }
 
         if (songStart && mLyricList != null) {
             songTime += deltaTime;

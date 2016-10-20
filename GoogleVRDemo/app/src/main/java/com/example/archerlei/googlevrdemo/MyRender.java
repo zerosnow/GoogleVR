@@ -1,5 +1,6 @@
 package com.example.archerlei.googlevrdemo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -238,14 +239,21 @@ public class MyRender extends VRRenderer {
     }
 
 
+    private double lookAtTime = 0;
+
     @Override
     public void onRender(long elapsedTime, double deltaTime) {
         super.onRender(elapsedTime, deltaTime);
         boolean isLookingAt = isLookingAtObject(lookatSphere);
         if(isLookingAt) {
+            lookAtTime += deltaTime;
+            if (lookAtTime >= 2 && mContext instanceof Activity) {
+                ((Activity) mContext).finish();
+            }
             lookatSphere.setColor(Color.RED);
         } else {
             lookatSphere.setColor(Color.YELLOW);
+            lookAtTime = 0;
         }
 
         if(spaceShipSoundId != GvrAudioEngine.INVALID_ID) {

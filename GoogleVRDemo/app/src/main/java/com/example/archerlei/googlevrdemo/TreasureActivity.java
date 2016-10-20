@@ -183,7 +183,7 @@ public class TreasureActivity extends GvrActivity implements GvrView.StereoRende
         gvrView.setEGLConfigChooser(8, 8, 8, 8, 16, 8);
 
         gvrView.setRenderer(this);
-        gvrView.setTransitionViewEnabled(true);
+//        gvrView.setTransitionViewEnabled(true);
 
         if (gvrView.setAsyncReprojectionEnabled(true)) {
             // Async reprojection decouples the app framerate from the display framerate,
@@ -512,6 +512,9 @@ public class TreasureActivity extends GvrActivity implements GvrView.StereoRende
     /**
      * Called when the Cardboard trigger is pulled.
      */
+
+    private int time = 0;
+
     @Override
     public void onCardboardTrigger() {
         Log.i(TAG, "onCardboardTrigger");
@@ -520,6 +523,11 @@ public class TreasureActivity extends GvrActivity implements GvrView.StereoRende
             successSourceId = gvrAudioEngine.createStereoSound(SUCCESS_SOUND_FILE);
             gvrAudioEngine.playSound(successSourceId, false /* looping disabled */);
             hideObject();
+
+            time++;
+            if (time == 3) {
+                this.finish();
+            }
         }
 
         // Always give user feedback.
