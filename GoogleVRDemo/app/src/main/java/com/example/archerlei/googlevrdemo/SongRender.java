@@ -45,6 +45,7 @@ public class SongRender extends VRRenderer{
     private Paint mLyricPaint;
     private Material mLyricMaterial;
     private Plane mLyricScreen;
+    private Texture mLyricTexture;
     private List<LyricInfo> mLyricList;
     private double songTime = 0;
     private boolean songStart = false;
@@ -88,7 +89,8 @@ public class SongRender extends VRRenderer{
 
             mLyricMaterial  = new Material();
             mLyricMaterial.setColor(0x444444);
-            mLyricMaterial.addTexture(new Texture("simple", mLyricBitmap));
+            mLyricTexture = new Texture("simple", mLyricBitmap);
+            mLyricMaterial.addTexture(mLyricTexture);
 
             mLyricScreen = new Plane(20, 5, 1, 1);
             mLyricScreen.setZ(-9f);
@@ -201,14 +203,17 @@ public class SongRender extends VRRenderer{
 
         if (songStart && mLyricList != null) {
             songTime += deltaTime;
-            if (songTime > mLyricList.get(index).lyricTime / 1000.0) {
+            if (songTime > mLyricList.get(index).lyricTime / 1000.0 && index < mLyricList.size() - 1) {
+
                 mLyricCanvas.drawColor(Color.BLACK);
                 mLyricPaint.setColor(Color.RED);
                 mLyricCanvas.drawText(mLyricList.get(index).lyricText, 20, mLyricCanvas.getHeight()  / 2, mLyricPaint);
                 mLyricPaint.setColor(Color.WHITE);
-                mLyricCanvas.drawText(mLyricList.get((index + 1) % mLyricList.size()).lyricText, 100, mLyricCanvas.getHeight()  / 2 + mLyricPaint.getTextSize(), mLyricPaint);
+                mLyricCanvas.drawText(mLyricList.get(index + 1).lyricText, 100, mLyricCanvas.getHeight()  / 2 + mLyricPaint.getTextSize(), mLyricPaint);
                 try {
-                    mLyricMaterial.addTexture(new Texture("simple", mLyricBitmap));
+                    mLyricMaterial.removeTexture(mLyricTexture);
+                    mLyricTexture = new Texture("simple", mLyricBitmap);
+                    mLyricMaterial.addTexture(mLyricTexture);
                 } catch (ATexture.TextureException e) {
                     e.printStackTrace();
                 }
