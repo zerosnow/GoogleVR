@@ -39,21 +39,33 @@
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <category android:name="com.google.intent.category.DAYDREAM"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".PlaneActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <category android:name="com.google.intent.category.DAYDREAM"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".TreasureActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <category android:name="com.google.intent.category.DAYDREAM"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".SongActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <category android:name="com.google.intent.category.DAYDREAM"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
